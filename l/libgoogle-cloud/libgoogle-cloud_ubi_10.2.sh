@@ -162,16 +162,6 @@ else
     exit 1
 fi
 
-OTEL_CONFIG=$(find / -name opentelemetry-cpp-config.cmake 2>/dev/null | head -1)
-
-if [ -n "${OTEL_CONFIG}" ]; then
-    OTEL_PREFIX=$(dirname "$(dirname "${OTEL_CONFIG}")")
-    export CMAKE_PREFIX_PATH="${OTEL_PREFIX};${CMAKE_PREFIX_PATH}"
-fi
-if [ -z "${OTEL_CONFIG}" ]; then
-    echo "ERROR: opentelemetry-cpp-config.cmake not found"
-    exit 1
-fi
 # Clone source
 rm -rf "$PACKAGE_DIR"
 if ! git clone "$PACKAGE_URL" "$PACKAGE_DIR"; then
